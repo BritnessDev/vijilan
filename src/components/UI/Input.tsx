@@ -2,8 +2,8 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 
 interface IDefaultInput {
-    value: string | number;
-    setValue: (value: string | number) => void;
+    value: string;
+    setValue: (value: string) => void;
     placeholder?: string;
     cssClasses?: string;
 }
