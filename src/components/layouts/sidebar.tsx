@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface ISidebar {
     selectedTab: string;
     setSelectedTab: (e: string) => void;

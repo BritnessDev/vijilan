@@ -1,3 +1,4 @@
+import React from 'react';
 import Sidebar from './sidebar';
 import Navbar from './navbar';
 
@@ -9,7 +10,7 @@ interface ILayout {
 const Layout: React.FC<React.PropsWithChildren<ILayout>> = ({ selectedTab, setSelectedTab, children }) => (
     <div className="flex">
         <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
-        <div>
+        <div className="flex-1">
             <Navbar />
             {children}
         </div>
