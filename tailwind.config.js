@@ -5,6 +5,7 @@ module.exports = {
             colors: {
                 themeBg1: '#F1F2F5',
                 textBlue1: '#4880FF',
+                textDark1: '#364659',
                 textGray1: 'rgba(62, 74, 85, 0.60)',
             },
             boxShadow: {
