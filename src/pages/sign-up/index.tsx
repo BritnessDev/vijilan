@@ -11,8 +11,8 @@ export const SignUp = () => {
     const [email, setEmail] = useState('');
     return (
         <div className="bg-themeBg1 w-[100vw] h-[100vh] flex justify-center items-center">
-            <div className="p-4">
-                <div className="md:py-16 md:px-24 py-8 px-12 shadow-card flex justify-center flex-col">
+            <div className="p-4 w-full flex justify-center">
+                <div className="md:py-16 md:px-24 py-8 px-12 shadow-card flex justify-center flex-col rounded-lg bg-white md:w-[752px] w-full">
                     <img alt="no logo" src={Logo} className="h-14" />
                     <p className="mt-2.5 w-full text-center text-2xl font-inter">
                         <span className="text-textBlue1 font-semibold">Sign Up</span> Vijilan&apos;s Portal
