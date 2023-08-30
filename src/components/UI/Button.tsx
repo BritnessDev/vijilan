@@ -17,7 +17,7 @@ interface IBlueButton {
 }
 
 export const BlueButton: React.FC<IBlueButton> = (props) => (
-    <button className='px-12 py-3 rounded-lg bg-textBlue1 font-medium font-inter uppercase hover:opacity-80' onClick={props.onClickHandler}>
+    <button className="px-12 py-3 rounded-lg bg-textBlue1 font-medium font-inter uppercase hover:opacity-80" onClick={props.onClickHandler}>
         {props.Label}
     </button>
-)
+);

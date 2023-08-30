@@ -5,7 +5,7 @@ module.exports = {
             colors: {
                 themeBg1: '#F1F2F5',
                 textBlue1: '#4880FF',
-                textGray1: 'rgba(62, 74, 85, 0.60)'
+                textGray1: 'rgba(62, 74, 85, 0.60)',
             },
             boxShadow: {
                 card: '0px 0px 5px 0px rgba(0, 0, 0, 0.25)',
