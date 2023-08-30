@@ -14,7 +14,7 @@ function App() {
             <Routes>
                 <Route element={<SignUp />} path="/sign-up" />
                 <Route element={<SignIn />} path="/sign-in" />
-              <Route
+                <Route
                     element={
                         <Layout selectedTab={selectedTab} setSelectedTab={(e) => setSelectedTab(e)}>
                             <Tickets />
@@ -22,7 +22,7 @@ function App() {
                     }
                     path="/tickets"
                 />
-        <Route element={<CheckEmail />} path="/check-email" />
+                <Route element={<CheckEmail />} path="/check-email" />
             </Routes>
         </BrowserRouter>
     );
