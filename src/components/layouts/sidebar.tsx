@@ -20,7 +20,7 @@ const Sidebar: React.FC = () => {
     const [selected, setSelected] = useState(menuItems[0]);
     const fileRef = useRef<HTMLInputElement | null>(null);
     return (
-        <div className={`p-2 bg-[#191919] duration-500 ${isOpen ? 'h-[100vh] min-w-[184px]' : 'h-[80vh]'}`}>
+        <div className={`p-2 bg-[#191919] duration-500 relative ${isOpen ? 'h-[100vh] min-w-[184px]' : 'h-[80vh]'}`}>
             {/* <div className='p-2 w-full'>
                 <div className='w-full border border-[#7C7C7C] rounded-xl border-dashed px-2.5 py-2 flex flex-col items-center gap-y-2 cursor-pointer' onClick={() => {if(fileRef.current) fileRef.current.click();}}>
                     <div className={`flex gap-2 items-center ${isOpen ? 'flex-row' : 'flex-col'}`}>
@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => {
                     />
                 ))}
             </div>
-            <div className={`w-full flex mt-9 ${isOpen ? 'justify-end' : 'justify-center'}`}>
+            <div className={`w-full flex ${isOpen ? 'justify-end absolute bottom-9 right-5' : 'justify-center mt-9'}`}>
                 <button className="rounded-lg bg-[#474747] text-white p-2" onClick={() => setOpen(!isOpen)}>
                     <img src={SideCollapseVertical} alt="no icon" />
                 </button>
