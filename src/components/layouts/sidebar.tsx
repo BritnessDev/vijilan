@@ -13,19 +13,14 @@ import SideCollapseVertical from '../../assets/img/icons/side-collapse-vertical.
 import SideLogo from '../../assets/img/icons/side-logo.svg';
 import SideLogoSm from '../../assets/img/icons/side-logo-sm.svg';
 
-interface ISidebar {
-    selectedTab: string;
-    setSelectedTab: (e: string) => void;
-}
-
-const Sidebar: React.FC<ISidebar> = () => {
+const Sidebar: React.FC = () => {
     const [isOpen, setOpen] = useState(true);
     const menuItems = ['Dashboard', 'To-do Lists', 'Companies', 'Assets', 'Tickets', 'Operations', 'Reports', 'Library'];
     const menuIcons = [SideDashboard, SideToDoList, SideCompanies, SideAssets, SideTickets, SideOperations, SideReports, SideLibrary];
     const [selected, setSelected] = useState(menuItems[0]);
     const fileRef = useRef<HTMLInputElement | null>(null);
     return (
-        <div className={`p-2 bg-[#191919] duration-500 ${isOpen ? 'h-[100vh]' : 'h-[80vh]'}`}>
+        <div className={`p-2 bg-[#191919] duration-500 ${isOpen ? 'h-[100vh] min-w-[184px]' : 'h-[80vh]'}`}>
             {/* <div className='p-2 w-full'>
                 <div className='w-full border border-[#7C7C7C] rounded-xl border-dashed px-2.5 py-2 flex flex-col items-center gap-y-2 cursor-pointer' onClick={() => {if(fileRef.current) fileRef.current.click();}}>
                     <div className={`flex gap-2 items-center ${isOpen ? 'flex-row' : 'flex-col'}`}>
@@ -40,7 +35,7 @@ const Sidebar: React.FC<ISidebar> = () => {
                     <input type='file' ref={fileRef} className='hidden' />
                 </div>
             </div> */}
-            <div className={`w-full flex justify-center duration-500 ${isOpen ? '' : 'w-[50px]'}`}>
+            <div className={`w-full flex justify-center duration-500 ${isOpen ? 'w-full' : 'w-[50px]'}`}>
                 {isOpen ? <img src={SideLogo} alt="side logo" /> : <img src={SideLogoSm} alt="side logo" />}
             </div>
             <div className="pt-6">
@@ -55,7 +50,7 @@ const Sidebar: React.FC<ISidebar> = () => {
                     />
                 ))}
             </div>
-            <div className="w-full flex justify-end mt-9">
+            <div className={`w-full flex mt-9 ${isOpen ? 'justify-end' : 'justify-center'}`}>
                 <button className="rounded-lg bg-[#474747] text-white p-2" onClick={() => setOpen(!isOpen)}>
                     <img src={SideCollapseVertical} alt="no icon" />
                 </button>
