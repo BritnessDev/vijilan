@@ -8,7 +8,6 @@ import CheckEmail from './pages/sign-up/check-email';
 import './App.css';
 
 function App() {
-    const [selectedTab, setSelectedTab] = useState('');
     return (
         <BrowserRouter>
             <Routes>
@@ -16,7 +15,7 @@ function App() {
                 <Route element={<SignIn />} path="/sign-in" />
                 <Route
                     element={
-                        <Layout selectedTab={selectedTab} setSelectedTab={(e) => setSelectedTab(e)}>
+                        <Layout>
                             <Tickets />
                         </Layout>
                     }
