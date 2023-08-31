@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import TimelineQuestion from '../../assets/img/timeline-question.svg';
 import Bull from '../../assets/img/bull.svg';
-import { NameLabel } from '../UI/Label';
+import AccountMenu, { NameLabel } from '../UI/Label';
 
 const Navbar: React.FC = () => {
     // const [search, setSearch] = useState('');
@@ -23,7 +23,8 @@ const Navbar: React.FC = () => {
                 </button>
             </div>
             <div className="px-7 h-full flex items-center">
-                <NameLabel label="OP" />
+                {/* <NameLabel label="OP" /> */}
+                <AccountMenu label="OP" name="Luis Otavio" email="lom.vsi@vijilan.com" />
             </div>
         </div>
     );
