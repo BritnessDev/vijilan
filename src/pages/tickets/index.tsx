@@ -22,6 +22,7 @@ import Exclamation2 from '../../assets/img/exclamation-2-mark.svg';
 import Exclamation3 from '../../assets/img/exclamation-3-mark.svg';
 import BasicModal from '../../components/UI/Modal';
 import BasicSelect from '../../components/UI/Select';
+import { DefaultInput } from '../../components/UI/Input';
 
 const columns: GridColDef[] = [
     {
@@ -227,7 +228,7 @@ const columns: GridColDef[] = [
             }
         },
     },
-    { field: 'edit', headerName: '', minWidth: 50, flex: 0.1, renderCell: () => <MoreVertMenu label="sdf" /> },
+    { field: 'edit', headerName: '', minWidth: 80, flex: 0.1, renderCell: () => <MoreVertMenu value="" /> },
 ];
 
 const Tickets: React.FC = () => {
@@ -452,10 +453,42 @@ const Tickets: React.FC = () => {
                 <div className="w-[700px]">
                     <p className="text-[#212121] font-inter text-2xl font-bold">Add a Ticket</p>
                     <div className="mt-8 flex flex-col gap-y-4">
-                        <BasicSelect value={companyName} setValue={setCompanyName} options={[]} name="Company name" />
-                        <BasicSelect value={team} setValue={setTeam} options={[]} name="Team" />
-                        <BasicSelect value={severity} setValue={setSeverity} options={[]} name="Severity" />
-                        <BasicSelect value={subject} setValue={setSubject} options={[]} name="Subject" />
+                        <DefaultInput value={companyName} setValue={setCompanyName} placeholder="Company name" />
+                        <BasicSelect
+                            value={team}
+                            setValue={setTeam}
+                            options={[
+                                {
+                                    label: 'SOC',
+                                    value: 'SOC',
+                                },
+                                {
+                                    label: 'Support',
+                                    value: 'Support',
+                                },
+                            ]}
+                            name="Team"
+                        />
+                        <BasicSelect
+                            value={severity}
+                            setValue={setSeverity}
+                            options={[
+                                {
+                                    label: 'Low',
+                                    value: 'Low',
+                                },
+                                {
+                                    label: 'Medium',
+                                    value: 'Medium',
+                                },
+                                {
+                                    label: 'High',
+                                    value: 'High',
+                                },
+                            ]}
+                            name="Severity"
+                        />
+                        <DefaultInput value={subject} setValue={setSubject} placeholder="Subject" />
                         <div className="w-full">
                             <TextField
                                 label="Description"
