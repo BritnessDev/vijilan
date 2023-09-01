@@ -2,11 +2,12 @@ import React from 'react';
 
 interface IBannerButton {
     text: string;
+    cssClasses: string;
     onClickHandler: () => void;
 }
 
-export const NormalButton: React.FC<IBannerButton> = ({ text, onClickHandler }) => (
-    <button className="text-red-400" onClick={onClickHandler}>
+export const NormalButton: React.FC<IBannerButton> = ({ text, cssClasses, onClickHandler }) => (
+    <button className={`${cssClasses} px-8 py-2 rounded-lg`} onClick={onClickHandler}>
         {text}
     </button>
 );
