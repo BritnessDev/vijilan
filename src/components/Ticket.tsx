@@ -1,132 +1,72 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Button from '@mui/material/Button';
+import MenuPageNext from '../assets/img/icons/menu-page-next.svg';
+import MenuConvertincident from '../assets/img/icons/menu-convertincident.svg';
+import MenuFileSearch from '../assets/img/icons/menu-file-search.svg';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 
-interface ILabel {
-    label: string;
-    name?: string;
-    email?: string;
+interface IMoreVertMenu {
+    value: string;
 }
 
-export const Ticket: React.FC<ILabel> = ({ label }) => (
-    <div className="rounded-full bg-[#446ECC] w-[26px] h-[26px] flex justify-center items-center text-[#FAFAFA] text-sm cursor-pointer">{label}</div>
-);
-
-export default function MoreVertMenu(props: ILabel) {
+export default function MoreVertMenu(props: IMoreVertMenu) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
-    return (
-        <React.Fragment>
-            <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                <Tooltip title="Account settings">
-                    <IconButton
-                        onClick={handleClick}
-                        size="small"
-                        aria-controls={open ? 'account-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined}
-                    >
-                        <MoreVertIcon />
-                    </IconButton>
 
-                    {/* </MoreVertIcon>
-                    <IconButton
-                        className="text-[#FAFAFA] text-sm bg-[#446ECC]"
-                    >
-                        <div className="rounded-full bg-[#446ECC] w-[26px] h-[26px] flex justify-center items-center text-[#FAFAFA] text-sm cursor-pointer">
-                            {props.label}
-                        </div>
-                    </IconButton> */}
-                </Tooltip>
-            </Box>
+    return (
+        <div>
+            <Button
+                id="basic-button"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+            >
+                <MoreVertIcon />
+            </Button>
             <Menu
+                id="basic-menu"
                 anchorEl={anchorEl}
-                id="account-menu"
                 open={open}
                 onClose={handleClose}
-                onClick={handleClose}
-                PaperProps={{
-                    elevation: 0,
-                    sx: {
-                        overflow: 'visible',
-                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                        mt: 1.5,
-                        '& .MuiAvatar-root': {
-                            width: 32,
-                            height: 32,
-                            ml: -0.5,
-                            mr: 1,
-                        },
-                        '&:before': {
-                            content: '""',
-                            display: 'block',
-                            position: 'absolute',
-                            top: 0,
-                            right: 14,
-                            width: 10,
-                            height: 10,
-                            bgcolor: 'background.paper',
-                            transform: 'translateY(-50%) rotate(45deg)',
-                            zIndex: 0,
-                        },
-                    },
+                MenuListProps={{
+                    'aria-labelledby': 'basic-button',
                 }}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem onClick={handleClose}>
-                    <div className="rounded-full bg-[#446ECC80] w-[26px] h-[26px] flex justify-center items-center text-[#FAFAFA] text-sm cursor-pointer">
-                        {props.label}
-                    </div>
-                    <div className="ml-4">
-                        <p className="text-textBlue1 font-medium text-sm">{props.name}</p>
-                        <p className="text-gray-400 text-xs">{props.email}</p>
+                    <div className="flex items-center justify-between gap-x-8">
+                        <img src={MenuPageNext} alt="no icon" />
+                        <p className="font-inter text-sm text-[#303030de]">Open detail</p>
                     </div>
                 </MenuItem>
-                <Divider className="mx-2" />
                 <MenuItem onClick={handleClose}>
-                    <p className="text-sm text-textBlue1">Profile & Account</p>
+                    <div className="flex items-center justify-between gap-x-8">
+                        <BookmarksIcon className="text-[#303030de]" />
+                        <p className="font-inter text-sm text-[#303030de]">Add to watch list</p>
+                    </div>
                 </MenuItem>
-                <Divider />
                 <MenuItem onClick={handleClose}>
-                    <p className="text-sm text-textBlue1">Logout</p>
+                    <div className="flex items-center justify-between gap-x-8">
+                        <img src={MenuConvertincident} alt="no icon" />
+                        <p className="font-inter text-sm text-[#303030de]">Convert into incident</p>
+                    </div>
                 </MenuItem>
-                {/* <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem> */}
+                <MenuItem onClick={handleClose}>
+                    <div className="flex items-center justify-between gap-x-8">
+                        <img src={MenuFileSearch} alt="no icon" />
+                        <p className="font-inter text-sm text-[#303030de]">Proceed to investigation</p>
+                    </div>
+                </MenuItem>
             </Menu>
-        </React.Fragment>
+        </div>
     );
 }
