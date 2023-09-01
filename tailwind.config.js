@@ -11,6 +11,9 @@ module.exports = {
             boxShadow: {
                 card: '0px 0px 5px 0px rgba(0, 0, 0, 0.25)',
             },
+            height: {
+                select: '40px !important',
+            },
             fontFamily: {
                 inter: ['"Inter"'],
             },

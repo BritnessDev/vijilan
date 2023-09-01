@@ -1,7 +1,7 @@
 import React from 'react';
 import CircleCheckMark from '../../assets/img/circle-check-mark.svg';
 
-import { IOutlineButton } from '../../components/UI/Button';
+import { OutlineButton } from '../../components/UI/Button';
 
 function CheckEmail() {
     return (
@@ -31,7 +31,7 @@ function CheckEmail() {
 
                     <div className="mt-6 flex justify-center">
                         <div className="flex flex-col items-center">
-                            <IOutlineButton
+                            <OutlineButton
                                 onClickHandler={() => {
                                     console.log('');
                                 }}

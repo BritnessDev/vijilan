@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Chip from '@mui/material/Chip';
-import { Button } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField, colors } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import AddIcon from '@mui/icons-material/Add';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import MoreVertMenu from '../../components/Ticket';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { TableCell } from '@mui/material';
 
-import { BlueButton } from '../../components/UI/Button';
+import { BlueButton, OutlineButton, NormalButton } from '../../components/UI/Button';
 import Order from '../../assets/img/order-mark.svg';
 import Download from '../../assets/img/download-mark.svg';
 import Issue from '../../assets/img/issues-mark.svg';
@@ -224,7 +223,7 @@ const columns: GridColDef[] = [
             }
         },
     },
-    { field: 'edit', headerName: '', minWidth: 50, flex: 0.1, renderCell: () => <MoreVertIcon /> },
+    { field: 'edit', headerName: '', minWidth: 50, flex: 0.1, renderCell: () => <MoreVertMenu label="sdf" /> },
 ];
 
 const rows = [
@@ -266,69 +265,239 @@ const rows = [
     },
 ];
 
-const Tickets: React.FC = () => (
-    <div className="w-full">
-        <div className="px-8 py-4">
-            <div className="font-semibold font-inter text-2xl p-2">Tickets</div>
-            <div className="table w-full">
-                <div className="sort-ctrl shadow-card rounded-lg p-4 flex justify-between flex items-center">
-                    <div>
-                        <Chip
-                            className="p-4 font-inter"
-                            label="Open Filters"
-                            variant="filled"
-                            icon={<FilterListIcon />}
-                            size="small"
-                            style={{ background: '#DEECFF', padding: '5px' }}
-                        />
-                        <Chip
-                            className="mx-2"
-                            label="Newest On Top"
-                            variant="filled"
-                            icon={<img src={Order} />}
-                            size="small"
-                            style={{ background: '#DEECFF', padding: '5px' }}
-                        />
-                        <Chip
-                            label="Watch List"
-                            variant="filled"
-                            icon={<BookmarksIcon style={{ width: '14px' }} />}
-                            size="small"
-                            style={{ background: '#DEECFF', padding: '5px' }}
-                        />
+const Tickets: React.FC = () => {
+    const [filters, setFilters] = useState(false);
+    const [oldtonew, setOldetonew] = useState(false);
+    const [watchlist, setWatchlist] = useState(false);
+
+    return (
+        <div className="w-full">
+            <div className="px-8 py-4">
+                <div className="font-semibold font-inter text-2xl p-2">Tickets</div>
+                <div className="table w-full">
+                    <div className="sort-ctrl shadow-card rounded-lg p-4 flex justify-between items-center">
+                        <div>
+                            <Chip
+                                className="p-4 font-inter font-medium text-sm"
+                                label={!filters ? 'Open Filters' : 'Close Filters'}
+                                variant="filled"
+                                icon={!filters ? <FilterListIcon /> : <FilterListIcon className="rotate-180" style={{ color: '#4880FF' }} />}
+                                size="small"
+                                style={
+                                    !filters
+                                        ? { background: '#DEECFF' }
+                                        : { background: '#DEECFF', color: '#4880FF', border: '1px', borderStyle: 'solid', borderColor: '#4880FF' }
+                                }
+                                onClick={() => setFilters(!filters)}
+                            />
+                            <Chip
+                                className="mx-2"
+                                label={!oldtonew ? 'Newest On Top' : 'Old On Top'}
+                                variant="filled"
+                                icon={<img className={!oldtonew ? '' : 'rotate-180'} src={Order} />}
+                                size="small"
+                                style={
+                                    !oldtonew
+                                        ? { background: '#DEECFF', marginLeft: '5px', marginRight: '5px' }
+                                        : {
+                                              background: '#DEECFF',
+                                              color: '#4880FF',
+                                              border: '1px',
+                                              borderStyle: 'solid',
+                                              borderColor: '#4880FF',
+                                              marginLeft: '5px',
+                                              marginRight: '5px',
+                                          }
+                                }
+                                onClick={() => setOldetonew(!oldtonew)}
+                            />
+                            <Chip
+                                label="Watch List"
+                                variant="filled"
+                                icon={<BookmarksIcon style={!watchlist ? { width: '14px' } : { width: '14px', color: '#4880FF' }} />}
+                                size="small"
+                                style={
+                                    !watchlist
+                                        ? { background: '#DEECFF' }
+                                        : { background: '#DEECFF', color: '#4880FF', border: '1px', borderStyle: 'solid', borderColor: '#4880FF' }
+                                }
+                                onClick={() => setWatchlist(!watchlist)}
+                            />
+                        </div>
+                        <div>
+                            <BlueButton
+                                onClickHandler={() => {
+                                    console.log('');
+                                }}
+                                Label={
+                                    <div className="font-inter font-medium text-sm text-white uppercase">
+                                        <AddIcon /> add ticket
+                                    </div>
+                                }
+                            />
+
+                            <Button startIcon={<img src={Download} />} />
+                        </div>
                     </div>
-                    <div>
-                        <BlueButton
-                            onClickHandler={() => {
-                                console.log('');
+
+                    <div className="content shadow-card rounded-lg mt-2.5 flex divide-x-2 justify-between p-1">
+                        <div className="form p-2 w-full">
+                            <div className="flex w-full space-x-2">
+                                <FormControl className="w-1/4">
+                                    <TextField
+                                        id="outlined-basic"
+                                        className="font-normal text-base font-inter"
+                                        label="Search"
+                                        variant="outlined"
+                                        value={'ID, Search'}
+                                        InputProps={{ sx: { height: '40px' } }}
+                                    />
+                                </FormControl>
+                                <FormControl className="w-1/4">
+                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
+                                    <Select
+                                        className="h-select"
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={10}
+                                        style={{ color: '#3E4A55A3' }}
+                                        // label="Age"
+                                        // onChange={handleChange}
+                                    >
+                                        <MenuItem value={10}>Severity</MenuItem>
+                                        <MenuItem value={20}>Twenty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <FormControl className="w-1/4">
+                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
+                                    <Select
+                                        className="h-select"
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={10}
+                                        style={{ color: '#3E4A55A3' }}
+                                        // label="Age"
+                                        // onChange={handleChange}
+                                    >
+                                        <MenuItem value={10}>Company</MenuItem>
+                                        <MenuItem value={20}>Twenty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <FormControl className="w-1/4">
+                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
+                                    <Select
+                                        className="h-select"
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={10}
+                                        style={{ color: '#3E4A55A3' }}
+                                        // label="Age"
+                                        // onChange={handleChange}
+                                    >
+                                        <MenuItem value={10}>Tags</MenuItem>
+                                        <MenuItem value={20}>Twenty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+
+                            <div className="mt-2 flex w-full space-x-2">
+                                <FormControl className="w-1/4">
+                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
+                                    <Select
+                                        className="h-select"
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={10}
+                                        style={{ color: '#3E4A55A3' }}
+                                        // label="Age"
+                                        // onChange={handleChange}
+                                    >
+                                        <MenuItem value={10}>Status</MenuItem>
+                                        <MenuItem value={20}>Twenty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <FormControl className="w-1/4">
+                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
+                                    <Select
+                                        className="h-select"
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={10}
+                                        style={{ color: '#3E4A55A3' }}
+                                        // label="Age"
+                                        // onChange={handleChange}
+                                    >
+                                        <MenuItem value={10}>Type</MenuItem>
+                                        <MenuItem value={20}>Twenty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <FormControl className="w-1/4">
+                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
+                                    <Select
+                                        className="h-select"
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={10}
+                                        style={{ color: '#3E4A55A3' }}
+                                        // label="Age"
+                                        // onChange={handleChange}
+                                    >
+                                        <MenuItem value={10}>Activity</MenuItem>
+                                        <MenuItem value={20}>Twenty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <FormControl className="w-1/4">
+                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
+                                    <Select
+                                        className="h-select"
+                                        labelId="demo-simple-select-label"
+                                        id="demo-simple-select"
+                                        value={10}
+                                        style={{ color: '#3E4A55A3' }}
+                                        // label="Age"
+                                        // onChange={handleChange}
+                                    >
+                                        <MenuItem value={10}>Open date</MenuItem>
+                                        <MenuItem value={20}>Twenty</MenuItem>
+                                        <MenuItem value={30}>Thirty</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                        </div>
+                        <div className="ctrl w-[200px] space-x-2 flex items-start mt-2 justify-center">
+                            <Button className="uppercase shadow-card font-[Robot] font-medium text-sm" style={{ color: 'black' }}>
+                                reset
+                            </Button>
+                            <Button className="uppercase font-[Robot] font-medium text-sm" variant="outlined">
+                                apply
+                            </Button>
+                        </div>
+                    </div>
+
+                    <div className="content shadow-card rounded-lg mt-2.5">
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            rowHeight={64}
+                            initialState={{
+                                pagination: {
+                                    paginationModel: { page: 0, pageSize: 5 },
+                                },
                             }}
-                            Label={
-                                <div className="font-inter font-medium text-sm text-white uppercase">
-                                    <AddIcon /> add ticket
-                                </div>
-                            }
+                            pageSizeOptions={[5, 10]}
+                            checkboxSelection
                         />
-
-                        <Button startIcon={<img src={Download} />} />
                     </div>
-                </div>
-
-                <div className="content shadow-card rounded-lg mt-2.5">
-                    <DataGrid
-                        rows={rows}
-                        columns={columns}
-                        initialState={{
-                            pagination: {
-                                paginationModel: { page: 0, pageSize: 5 },
-                            },
-                        }}
-                        pageSizeOptions={[5, 10]}
-                        checkboxSelection
-                    />
                 </div>
             </div>
         </div>
-    </div>
-);
+    );
+};
 
 export default Tickets;

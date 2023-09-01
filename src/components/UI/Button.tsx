@@ -27,7 +27,7 @@ interface IOutlineButton {
     onClickHandler: () => void;
 }
 
-export const IOutlineButton: React.FC<IOutlineButton> = (props) => (
+export const OutlineButton: React.FC<IOutlineButton> = (props) => (
     <button
         className="px-12 py-3 outline outline-1 outline-textBlue1 rounded-lg font-medium font-inter uppercase hover:bg-textBlue1 hover:text-white"
         onClick={props.onClickHandler}
