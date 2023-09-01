@@ -4,6 +4,7 @@ import Layout from './components/layouts';
 import SignUp from './pages/sign-up';
 import SignIn from './pages/sign-in';
 import Tickets from './pages/tickets';
+import TicketDetail from './pages/tickets/id';
 import CheckEmail from './pages/sign-up/check-email';
 import './App.css';
 
@@ -20,6 +21,14 @@ function App() {
                         </Layout>
                     }
                     path="/tickets"
+                />
+                <Route
+                    element={
+                        <Layout>
+                            <TicketDetail />
+                        </Layout>
+                    }
+                    path="/tickets/:id"
                 />
                 <Route element={<CheckEmail />} path="/check-email" />
             </Routes>

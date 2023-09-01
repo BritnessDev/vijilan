@@ -350,8 +350,11 @@ const Tickets: React.FC = () => {
                             <Button startIcon={<img src={Download} />} />
                         </div>
                     </div>
-
-                    <div className="content shadow-card rounded-lg mt-2.5 flex divide-x-2 justify-between p-1">
+                    <div
+                        className={`duration-200 ${
+                            filters ? 'h-0 opacity-0' : 'h-fit opacity-100 content shadow-card rounded-lg mt-2.5 flex divide-x-2 justify-between p-1'
+                        }`}
+                    >
                         <div className="form p-2 w-full">
                             <div className="flex w-full space-x-2">
                                 <FormControl className="w-1/4">
