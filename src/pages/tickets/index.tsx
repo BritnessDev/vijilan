@@ -23,6 +23,7 @@ import Exclamation3 from '../../assets/img/exclamation-3-mark.svg';
 import BasicModal from '../../components/UI/Modal';
 import BasicSelect from '../../components/UI/Select';
 import { DefaultInput } from '../../components/UI/Input';
+import { _Select } from '../../components/tickets/Select';
 
 const columns: GridColDef[] = [
     {
@@ -30,11 +31,13 @@ const columns: GridColDef[] = [
         headerName: 'ID',
         minWidth: 110,
         flex: 1,
-        renderCell: () => (
+        renderCell: (value) => (
             <div className="flex divide-x-2 items-center">
-                <div className="pr-1">
-                    <BookmarksIcon className="text-textBlue1" style={{ fontSize: '14px' }} />
-                </div>
+                {value.row.watchList && (
+                    <div className="pr-1">
+                        <BookmarksIcon className="text-textBlue1" style={{ fontSize: '14px' }} />
+                    </div>
+                )}
                 <div className="pl-2">
                     <div className="text-xs text-textBlue1 underline flex">
                         1827465 <img className="px-1" src={ExternalLink} />
@@ -306,121 +309,58 @@ const Tickets: React.FC = () => {
                                         InputProps={{ sx: { height: '40px' } }}
                                     />
                                 </FormControl>
-                                <FormControl className="w-1/4">
-                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                                    <Select
-                                        className="h-select"
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={10}
-                                        style={{ color: '#3E4A55A3' }}
-                                        // label="Age"
-                                        // onChange={handleChange}
-                                    >
-                                        <MenuItem value={10}>Severity</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl className="w-1/4">
-                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                                    <Select
-                                        className="h-select"
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={10}
-                                        style={{ color: '#3E4A55A3' }}
-                                        // label="Age"
-                                        // onChange={handleChange}
-                                    >
-                                        <MenuItem value={10}>Company</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl className="w-1/4">
-                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                                    <Select
-                                        className="h-select"
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={10}
-                                        style={{ color: '#3E4A55A3' }}
-                                        // label="Age"
-                                        // onChange={handleChange}
-                                    >
-                                        <MenuItem value={10}>Tags</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                <_Select
+                                    options={['High', 'Medium', 'Low']}
+                                    placeholder="Severity"
+                                    setValue={() => {
+                                        console.log();
+                                    }}
+                                />
+                                <_Select
+                                    options={['ACME Corporation']}
+                                    placeholder="Company"
+                                    setValue={() => {
+                                        console.log();
+                                    }}
+                                />
+                                <_Select
+                                    options={['Tags']}
+                                    placeholder="Tags"
+                                    setValue={() => {
+                                        console.log();
+                                    }}
+                                />
                             </div>
 
                             <div className="mt-2 flex w-full space-x-2">
-                                <FormControl className="w-1/4">
-                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                                    <Select
-                                        className="h-select"
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={10}
-                                        style={{ color: '#3E4A55A3' }}
-                                        // label="Age"
-                                        // onChange={handleChange}
-                                    >
-                                        <MenuItem value={10}>Status</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl className="w-1/4">
-                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                                    <Select
-                                        className="h-select"
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={10}
-                                        style={{ color: '#3E4A55A3' }}
-                                        // label="Age"
-                                        // onChange={handleChange}
-                                    >
-                                        <MenuItem value={10}>Type</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl className="w-1/4">
-                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                                    <Select
-                                        className="h-select"
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={10}
-                                        style={{ color: '#3E4A55A3' }}
-                                        // label="Age"
-                                        // onChange={handleChange}
-                                    >
-                                        <MenuItem value={10}>Activity</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl className="w-1/4">
-                                    {/* <InputLabel id="demo-simple-select-label">Age</InputLabel> */}
-                                    <Select
-                                        className="h-select"
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value={10}
-                                        style={{ color: '#3E4A55A3' }}
-                                        // label="Age"
-                                        // onChange={handleChange}
-                                    >
-                                        <MenuItem value={10}>Open date</MenuItem>
-                                        <MenuItem value={20}>Twenty</MenuItem>
-                                        <MenuItem value={30}>Thirty</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                <_Select
+                                    options={['New', 'Open', 'Closed']}
+                                    placeholder="Status"
+                                    setValue={() => {
+                                        console.log();
+                                    }}
+                                />
+                                <_Select
+                                    options={['High', 'Medium', 'Low']}
+                                    placeholder="Type"
+                                    setValue={() => {
+                                        console.log();
+                                    }}
+                                />
+                                <_Select
+                                    options={['Tags']}
+                                    placeholder="Activitiy"
+                                    setValue={() => {
+                                        console.log();
+                                    }}
+                                />
+                                <_Select
+                                    options={['05/06/2023']}
+                                    placeholder="Open date"
+                                    setValue={() => {
+                                        console.log();
+                                    }}
+                                />
                             </div>
                         </div>
                         <div className="ctrl w-[200px] space-x-2 flex items-start mt-2 justify-center">

@@ -1,29 +1,27 @@
+import { FormControl, Select, MenuItem } from '@mui/material';
 import React from 'react';
-import Chip from '@mui/material/Chip';
 
-interface IChip {
+interface ISelect {
     className?: string;
-    active: boolean;
-    label: Array<string>;
-    nodes: Array<React.ReactElement>;
-    // style: Array<any>,
-    onClickHandler: () => void;
+    placeholder?: string;
+    options: Array<string>;
+    setValue: (e: string) => void;
 }
 
-export const _Chip: React.FC<IChip> = (props) => (
-    <>
-        <Chip
-            className={props.className + 'p-4 font-inter font-medium text-sm'}
-            label={!props.active ? props.label[0] : props.label[1]}
-            variant="filled"
-            icon={!props.active ? props.nodes[0] : props.nodes[1]}
-            size="small"
-            style={
-                !props.active
-                    ? { background: '#DEECFF' }
-                    : { background: '#DEECFF', color: '#4880FF', border: '1px', borderStyle: 'solid', borderColor: '#4880FF' }
-            }
-            onClick={props.onClickHandler}
-        />
-    </>
+export const _Select: React.FC<ISelect> = (props) => (
+    <FormControl className="w-1/4">
+        <Select
+            className="h-select"
+            value={'0'}
+            displayEmpty
+            renderValue={() => <>{props.placeholder}</>}
+            style={{ color: '#3E4A55A3', fontFamily: 'Inter', fontWeight: 400, fontSize: '16px' }}
+        >
+            {props.options.map((ele, ind) => (
+                <MenuItem key={ind} value={ind}>
+                    {ele}
+                </MenuItem>
+            ))}
+        </Select>
+    </FormControl>
 );

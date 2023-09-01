@@ -1,6 +1,7 @@
 [
     {
       "id": 1,
+      "watchList": true,
       "severity": "high",
       "subject": "Login from outside authorized location",
       "company": "ACME Corporation",
@@ -16,6 +17,7 @@
     },
     {
       "id": 2,
+      "watchList": false,
       "severity": "medium",
       "subject": "Threat Intel: Outbound Tor Exit Nodes Traffic detected",
       "company": "ACME Corporation",
@@ -31,6 +33,7 @@
     },
     {
       "id": 3,
+      "watchList": false,
       "severity": "low",
       "subject": "Firewall - Admin Login Activity",
       "company": "ACME Corporation",
@@ -46,6 +49,7 @@
     },
     {
       "id": 4,
+      "watchList": true,
       "severity": "medium",
       "subject": "User locked out",
       "company": "ACME Corporation",
