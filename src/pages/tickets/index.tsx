@@ -1,14 +1,16 @@
 import React, { useState, useRef } from 'react';
 import Chip from '@mui/material/Chip';
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField, colors } from '@mui/material';
+import { Button, FormControl, MenuItem, Select, TextField } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertMenu from '../../components/Ticket';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { TableCell } from '@mui/material';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
 
-import { BlueButton, OutlineButton, NormalButton } from '../../components/UI/Button';
+import data from '../../data/tickets.json';
+import { BlueButton, NormalButton } from '../../components/UI/Button';
+import { _Chip } from '../../components/tickets/Chip';
 import Order from '../../assets/img/order-mark.svg';
 import Download from '../../assets/img/download-mark.svg';
 import Issue from '../../assets/img/issues-mark.svg';
@@ -20,7 +22,6 @@ import Exclamation2 from '../../assets/img/exclamation-2-mark.svg';
 import Exclamation3 from '../../assets/img/exclamation-3-mark.svg';
 import BasicModal from '../../components/UI/Modal';
 import BasicSelect from '../../components/UI/Select';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
 import { DefaultInput } from '../../components/UI/Input';
 
 const columns: GridColDef[] = [
@@ -134,8 +135,8 @@ const columns: GridColDef[] = [
     {
         field: 'subject',
         headerName: 'Subject',
-        minWidth: 160,
-        flex: 1,
+        minWidth: 180,
+        flex: 1.5,
         renderCell: (value) => {
             return (
                 <div className="whitespace-pre-wrap font-inter font-normal text-sm text-[#303030de]">
@@ -230,45 +231,6 @@ const columns: GridColDef[] = [
     { field: 'edit', headerName: '', minWidth: 80, flex: 0.1, renderCell: () => <MoreVertMenu value="" /> },
 ];
 
-const rows = [
-    {
-        id: 1,
-        severity: 'high',
-        subject: 'Login from outside authorized location',
-        company: 'ACME Corporation',
-        openDate: { date: 'Today', time: '9:54am' },
-        lastUpdate: { date: 'Today', time: '10:50pm' },
-        status: 'New',
-    },
-    {
-        id: 2,
-        severity: 'medium',
-        subject: 'Login from outside authorized location',
-        company: 'ACME Corporation',
-        openDate: { date: 'Today', time: '9:54am' },
-        lastUpdate: { date: 'Today', time: '9:54am' },
-        status: 'open',
-    },
-    {
-        id: 3,
-        severity: 'low',
-        subject: 'Login from outside authorized location',
-        company: 'ACME Corporation',
-        openDate: { date: '02/02/2023', time: '8:54am' },
-        lastUpdate: { date: '02/03/2023', time: '10:50am' },
-        status: 'resolved',
-    },
-    {
-        id: 4,
-        severity: 'medium',
-        subject: 'Login from outside authorized location',
-        company: 'ACME Corporation',
-        openDate: { date: '01/02/2023', time: '6:24am' },
-        lastUpdate: { date: '01/02/2023', time: '9:54pm' },
-        status: 'closed',
-    },
-];
-
 const Tickets: React.FC = () => {
     const [filters, setFilters] = useState(false);
     const [oldtonew, setOldetonew] = useState(false);
@@ -288,58 +250,34 @@ const Tickets: React.FC = () => {
                 <div className="table w-full">
                     <div className="sort-ctrl shadow-card rounded-lg p-4 flex justify-between items-center">
                         <div>
-                            <Chip
-                                className="p-4 font-inter font-medium text-sm"
-                                label={!filters ? 'Open Filters' : 'Close Filters'}
-                                variant="filled"
-                                icon={!filters ? <FilterListIcon /> : <FilterListIcon className="rotate-180" style={{ color: '#4880FF' }} />}
-                                size="small"
-                                style={
-                                    !filters
-                                        ? { background: '#DEECFF' }
-                                        : { background: '#DEECFF', color: '#4880FF', border: '1px', borderStyle: 'solid', borderColor: '#4880FF' }
-                                }
-                                onClick={() => setFilters(!filters)}
+                            <_Chip
+                                active={filters}
+                                label={['Open Filters', 'Close Filters']}
+                                nodes={[<FilterListIcon key="0" />, <FilterListIcon className="rotate-180" key="1" style={{ color: '#4880FF' }} />]}
+                                onClickHandler={() => setFilters(!filters)}
                             />
-                            <Chip
-                                className="mx-2"
-                                label={!oldtonew ? 'Newest On Top' : 'Old On Top'}
-                                variant="filled"
-                                icon={<img className={!oldtonew ? '' : 'rotate-180'} src={Order} />}
-                                size="small"
-                                style={
-                                    !oldtonew
-                                        ? { background: '#DEECFF', marginLeft: '5px', marginRight: '5px' }
-                                        : {
-                                              background: '#DEECFF',
-                                              color: '#4880FF',
-                                              border: '1px',
-                                              borderStyle: 'solid',
-                                              borderColor: '#4880FF',
-                                              marginLeft: '5px',
-                                              marginRight: '5px',
-                                          }
-                                }
-                                onClick={() => setOldetonew(!oldtonew)}
-                            />
-                            <Chip
-                                label="Watch List"
-                                variant="filled"
-                                icon={<BookmarksIcon style={!watchlist ? { width: '14px' } : { width: '14px', color: '#4880FF' }} />}
-                                size="small"
-                                style={
-                                    !watchlist
-                                        ? { background: '#DEECFF' }
-                                        : { background: '#DEECFF', color: '#4880FF', border: '1px', borderStyle: 'solid', borderColor: '#4880FF' }
-                                }
-                                onClick={() => setWatchlist(!watchlist)}
+
+                            <span className="mx-2">
+                                <_Chip
+                                    active={oldtonew}
+                                    label={['Newest On Top', 'Old On Top']}
+                                    nodes={[<img key="0" src={Order} />, <img className="rotate-180" key="1" src={Order} />]}
+                                    onClickHandler={() => setOldetonew(!oldtonew)}
+                                />
+                            </span>
+                            <_Chip
+                                active={watchlist}
+                                label={['Watch List', 'Watch List']}
+                                nodes={[
+                                    <BookmarksIcon key="0" style={{ width: '14px' }} />,
+                                    <BookmarksIcon key="1" style={{ width: '14px', color: '#4880FF' }} />,
+                                ]}
+                                onClickHandler={() => setWatchlist(!watchlist)}
                             />
                         </div>
                         <div>
                             <BlueButton
-                                onClickHandler={() => {
-                                    setNewTicket(true);
-                                }}
+                                onClickHandler={() => setNewTicket(true)}
                                 Label={
                                     <button className="font-inter font-medium text-sm text-white uppercase">
                                         <AddIcon /> add ticket
@@ -350,9 +288,10 @@ const Tickets: React.FC = () => {
                             <Button startIcon={<img src={Download} />} />
                         </div>
                     </div>
+
                     <div
                         className={`duration-200 ${
-                            filters ? 'h-0 opacity-0' : 'h-fit opacity-100 content shadow-card rounded-lg mt-2.5 flex divide-x-2 justify-between p-1'
+                            !filters ? 'h-0 opacity-0' : 'h-fit opacity-100 content shadow-card rounded-lg mt-2.5 flex divide-x-2 justify-between p-1'
                         }`}
                     >
                         <div className="form p-2 w-full">
@@ -496,7 +435,7 @@ const Tickets: React.FC = () => {
 
                     <div className="content shadow-card rounded-lg mt-2.5">
                         <DataGrid
-                            rows={rows}
+                            rows={data}
                             columns={columns}
                             rowHeight={64}
                             initialState={{
